@@ -1,14 +1,11 @@
+//to install the node_modules folder, type in CMD, on the folder where you have the project: npm install britecharts d3-selection
+
 function getStockName() {
-	console.log("se intra in functia getStockName()");
 	let stockName = document.getElementById("inputStock").value
-	console.log("stockName= " + stockName);
 	sendData(stockName);
 }
 
 function sendData(stockName) {
-	console.log("se intra in functia callAPI(stockName)");
-	console.log("stockName= " + stockName)
-
 	let stockDates = [];
 	let stockPrices = [];
 
@@ -23,20 +20,12 @@ function sendData(stockName) {
 	})
 	.then(data => {
 		console.log(data);
-
-		console.log("se va intra in for->");
 		for (var key in data['Time Series (Daily)']) {
-			console.log("sunt in for:\n");
 			stockDates.push(key);
 			stockPrices.push(data['Time Series (Daily)'][key]['1. open']);
 		}
-		console.log("s-a iesit din for.");
-		console.log(stockDates);
-		console.log(stockPrices);
-
 		drawGraph(stockDates, stockPrices);
 	})
-	console.log("SE TRECE DE .then(data)");
 }
 
 function drawGraph(stockDates, stockPrices) {
@@ -49,7 +38,6 @@ function drawGraph(stockDates, stockPrices) {
 	for (let i = 0; i < 10; ++i) { //stockDates.length
 		barData[i] = {name: stockDates[i], value: stockPrices[i]};
 	}
-	console.log(barData);
 
 	// Configure chart
 	barChart
@@ -59,7 +47,3 @@ function drawGraph(stockDates, stockPrices) {
 
 	container.datum(barData).call(barChart);
 }
-
-/*
-let string = "https://api.coingecko.com/api/v3/coins/" + currency1API +"/history?date="+indexDate+"&localization=false";
-*/
