@@ -19,17 +19,13 @@ function callAPI(stockName) {
 		return response.json();
 	})
 	.then(data => {
-		console.log(data);
 		for (var key in data['Time Series (Daily)']) {
 			stockDates.push(key);
 			stockPrices.push(data['Time Series (Daily)'][key]['1. open']);
 		}
-		console.log(stockDates);
-		console.log(stockPrices);
 
 		drawGraph(stockDates, stockPrices);
 	})
-	console.log("SE TRECE DE .then(data)");
 }
 
 function drawGraph(stockDates, stockPrices) {
@@ -61,5 +57,4 @@ function drawGraph(stockDates, stockPrices) {
 	        }]
 	    }
 	});
-	console.log(lineChart);
 }
