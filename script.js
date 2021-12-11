@@ -22,10 +22,8 @@ function callAPI() {
 		}
 		console.log(stockDates);
 		console.log(stockPrices);
-
 		drawGraph(stockDates, stockPrices);
 	});
-	console.log("SE TRECE DE .then(data)");
 }
 
 function drawGraph(stockDates, stockPrices) {
