@@ -1,5 +1,5 @@
 function callAPI() {
-	let stockName = document.getElementById("inputStock").value
+	const stockName = document.getElementById("inputStock").value
 
 	let stockDates = [];
 	let stockPrices = [];
@@ -9,21 +9,24 @@ function callAPI() {
 	//the API http is from documentation: https://www.alphavantage.co/documentation/
 	//to find the symbol of a company, search on google: 'company's name' stock symbol (ex: TESLA stock symbol)
 	//stock symbol ex: TSLA, AMZN, FB, AAPL, DAX, IBM, etc...
-	
+
+	console.log(fetch(API_Call));
 	fetch(API_Call)
 	.then(response => {
+		console.log(response);
 		return response.json();
 	})
 	.then(data => {
 		console.log(data);
 		for (var key in data['Time Series (Daily)']) {
-			stockDates.push(key);
-			stockPrices.push(data['Time Series (Daily)'][key]['1. open']);
+			stockDates.unshift(key);
+			stockPrices.unshift(data['Time Series (Daily)'][key]['1. open']);
 		}
 		console.log(stockDates);
 		console.log(stockPrices);
 		drawGraph(stockDates, stockPrices);
 	});
+	console.log(".then(data) terminat");
 }
 
 function drawGraph(stockDates, stockPrices) {
